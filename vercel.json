@@ -6,7 +6,15 @@
         "use": "@vercel/node"
       },
       {
-        "src": "public/**/*",
+        "src": "*.html",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "*.css",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "*.js",
         "use": "@vercel/static"
       }
     ],
@@ -17,23 +25,23 @@
       },
       {
         "src": "/",
-        "dest": "/public/index.html"
+        "dest": "/index.html"
       },
       {
         "src": "/create",
-        "dest": "/public/create.html"
+        "dest": "/create.html"
       },
       {
         "src": "/view",
-        "dest": "/public/view.html"
+        "dest": "/view.html"
       },
       {
         "src": "/about",
-        "dest": "/public/about.html"
+        "dest": "/about.html"
       },
       {
         "src": "/(.+)",
-        "dest": "/public/$1"
+        "dest": "/$1"
       }
     ]
   }

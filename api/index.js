@@ -11,7 +11,10 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../public')));
+
+// Determine the correct path to static files (adjust this to your actual file structure)
+// This will serve files from the root directory 
+app.use(express.static(path.join(__dirname, '..')));
 
 // In-memory data store (would use a database in production)
 let blogPosts = [];
@@ -93,8 +96,25 @@ app.delete('/api/posts/:id', (req, res) => {
 });
 
 // Handle direct access to routes for SPA behavior
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
+
+app.get('/create', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'create.html'));
+});
+
+app.get('/view', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'view.html'));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'about.html'));
+});
+
+// Default fallback handler
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 // Start server when running directly (not when imported by Vercel)
